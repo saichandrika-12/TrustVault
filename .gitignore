@@ -1,0 +1,8 @@
+.venv/
+venv/
+__pycache__/
+uploads/
+*.log
+document_permissions.json
+.env
+audit_log.json

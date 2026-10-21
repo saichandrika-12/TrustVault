@@ -1,0 +1,373 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustVault | Dashboard</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5fb;
+            color: #1e293b;
+        }
+        header {
+            background: linear-gradient(120deg, #102c55, #1d4ed8);
+            color: white;
+            padding: 25px max(22px, calc((100% - 1100px) / 2));
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            background: rgba(255,255,255,.16);
+            font-size: 25px;
+            font-weight: bold;
+        }
+        header h1 { margin: 0; font-size: 27px; }
+        header p {
+            margin: 7px 0 0;
+            color: #dbeafe;
+            font-size: 14px;
+        }
+        .top-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .top-links a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 14px;
+            border: 1px solid rgba(255,255,255,.35);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .top-links a:hover {
+            background: rgba(255,255,255,.12);
+        }
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .welcome {
+            margin-bottom: 24px;
+        }
+        .welcome h2 {
+            margin: 0 0 9px;
+            color: #102c55;
+            font-size: 27px;
+        }
+        .muted {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+        .account {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 9px 13px;
+            border-radius: 8px;
+            background: #e5edff;
+            color: #1e40af;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 22px;
+            border: 1px solid #e5eaf2;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(15, 35, 70, .045);
+        }
+        .card h3 {
+            color: #173b70;
+            margin: 0 0 10px;
+            font-size: 19px;
+        }
+        .section-description {
+            margin: 0 0 20px;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .message, .error {
+            padding: 14px 16px;
+            border-radius: 9px;
+            margin-bottom: 20px;
+            overflow-wrap: anywhere;
+        }
+        .message {
+            background: #ecfdf3;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        .error {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+        input[type="file"] {
+            display: block;
+            width: 100%;
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px dashed #b7c5d9;
+            border-radius: 9px;
+            background: #f8fafc;
+        }
+        select {
+            max-width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: white;
+            color: #334155;
+        }
+        button, .download-button {
+            display: inline-block;
+            background: #1d4ed8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 11px 15px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        button:hover, .download-button:hover {
+            background: #173b70;
+        }
+        .revoke-button {
+            background: #b42318;
+        }
+        .revoke-button:hover {
+            background: #8f1c13;
+        }
+        .document-item {
+            padding: 21px 0;
+            border-bottom: 1px solid #e8edf5;
+        }
+        .document-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .document-name {
+            font-size: 17px;
+            font-weight: bold;
+            color: #173b70;
+            overflow-wrap: anywhere;
+        }
+        .document-item p {
+            margin: 9px 0;
+        }
+        .document-actions, .share-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 14px;
+        }
+        .share-form {
+            padding: 13px;
+            background: #f8fafc;
+            border-radius: 9px;
+        }
+        .share-form label {
+            font-size: 13px;
+            font-weight: bold;
+            color: #475569;
+        }
+        .audit-list {
+            list-style: none;
+            padding: 0;
+            margin: 18px 0 0;
+        }
+        .audit-list li {
+            position: relative;
+            margin: 0;
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8edf5;
+            font-size: 13px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+        .audit-list li:nth-child(odd) {
+            background: #f8fafc;
+        }
+        .audit-list li:last-child {
+            border-bottom: none;
+        }
+        footer {
+            max-width: 1100px;
+            margin: 35px auto 0;
+            padding: 20px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+        @media (max-width: 600px) {
+            header { padding: 22px 20px; }
+            .container { margin-top: 22px; padding: 0 14px; }
+            .card { padding: 19px; }
+            .welcome h2 { font-size: 23px; }
+            .share-form { align-items: stretch; }
+            .share-form select, .share-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <div class="logo">T</div>
+            <div>
+                <h1>TrustVault</h1>
+                <p>Secure Document Sharing with a Real Audit Trail</p>
+            </div>
+        </div>
+        <nav class="top-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+    <main class="container">
+        <section class="welcome">
+            <h2>Dashboard</h2>
+            <p class="muted">Welcome back! Manage your documents and permissions.</p>
+            <div class="account">
+                Signed in as: <strong>{{ current_user }}</strong>
+            </div>
+        </section>
+        {% if message %}
+            <div class="message" role="status">{{ message }}</div>
+        {% endif %}
+        {% if error %}
+            <div class="error" role="alert">{{ error }}</div>
+        {% endif %}
+        <section class="card">
+            <h3>Upload Documents</h3>
+            <p class="section-description">
+                Select a file to upload to your secure document workspace.
+            </p>
+            <form action="{{ url_for('upload') }}"
+                  method="POST"
+                  enctype="multipart/form-data">
+                <input type="file" name="document" required>
+                <button type="submit">Upload Document</button>
+            </form>
+        </section>
+        <section class="card">
+            <h3>Shared Documents</h3>
+            <p class="section-description">
+                Access authorized files and manage document permissions.
+            </p>
+            {% if documents %}
+                {% for document in documents %}
+                    <div class="document-item">
+                        <div class="document-name">
+                            {{ document.filename }}
+                        </div>
+                        <p class="muted">
+                            Owner: {{ document.owner }}
+                        </p>
+                        <p class="muted">
+                            Users with access:
+                            {{ document.allowed_users | join(", ") }}
+                        </p>
+                        <div class="document-actions">
+                            <a class="download-button"
+                               href="{{ url_for('download', filename=document.filename) }}">
+                                Download Document
+                            </a>
+                        </div>
+                        {% if document.can_manage %}
+                            <form class="share-form"
+                                  action="{{ url_for('share_document', filename=document.filename) }}"
+                                  method="POST">
+                                <label for="share-{{ loop.index }}">
+                                    Grant access:
+                                </label>
+
+                                <select id="share-{{ loop.index }}"
+                                        name="share_with"
+                                        required>
+                                    <option value="">Select a user</option>
+                                    {% for user in other_users %}
+                                        <option value="{{ user }}">{{ user }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button type="submit">Grant Access</button>
+                            </form>
+                            {% set shared_users = document.allowed_users
+                                | reject("equalto", document.owner) | list %}
+                            {% if shared_users %}
+                                <form class="share-form"
+                                      action="{{ url_for('revoke_access', filename=document.filename) }}"
+                                      method="POST"
+                                      onsubmit="return confirm('Are you sure you want to revoke this user access?');">
+                                    <label for="revoke-{{ loop.index }}">
+                                        Revoke access:
+                                    </label>
+                                    <select id="revoke-{{ loop.index }}"
+                                            name="revoke_user"
+                                            required>
+                                        <option value="">Select a user</option>
+                                        {% for user in shared_users %}
+                                            <option value="{{ user }}">{{ user }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <button class="revoke-button" type="submit">
+                                        Revoke Access
+                                    </button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="muted">No documents available to your account.</p>
+            {% endif %}
+        </section>
+        <section class="card">
+            <h3>Audit Trail</h3>
+            <p class="section-description">
+                Review recorded login, download and document permission activity.
+            </p>
+            {% if audit_logs %}
+                <ul class="audit-list">
+                    {% for log in audit_logs %}
+                        <li>
+                            <strong>{{ log.time }}</strong>
+                            &nbsp;—&nbsp; {{ log.user }}
+                            &nbsp;—&nbsp; {{ log.activity }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="muted">No activity recorded yet.</p>
+            {% endif %}
+        </section>
+    </main>
+    <footer>
+        TrustVault &copy; 2026 | Secure Document Management
+    </footer>
+</body>
+</html>
+```

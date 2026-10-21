@@ -1,0 +1,216 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustVault | Secure Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eaf0ff, #f8faff);
+            color: #1e293b;
+        }
+        .login-box {
+            background: #ffffff;
+            width: 100%;
+            max-width: 440px;
+            padding: 38px;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            box-shadow: 0 15px 45px rgba(30, 58, 138, 0.10);
+        }
+        .brand {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .logo {
+            width: 62px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            background: #173b70;
+            color: white;
+            border-radius: 18px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        h1 {
+            margin: 0;
+            color: #173b70;
+            font-size: 30px;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 10px 0 0;
+        }
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 22px 0;
+            padding: 12px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            border-radius: 9px;
+            font-size: 13px;
+        }
+        label {
+            display: block;
+            margin: 18px 0 8px;
+            color: #334155;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            outline: none;
+            font-size: 15px;
+            background: #ffffff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 25px;
+            background: #1d4ed8;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #173b70;
+        }
+        .error {
+            background: #fef2f2;
+            color: #b91c1c;
+            padding: 12px;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .demo {
+            margin-top: 24px;
+            padding: 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 13px;
+            overflow-wrap: anywhere;
+        }
+        .demo-title {
+            color: #334155;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .account {
+            margin: 10px 0;
+            line-height: 1.8;
+            color: #64748b;
+        }
+        .account strong {
+            color: #334155;
+        }
+        .demo hr {
+            border: 0;
+            border-top: 1px solid #e2e8f0;
+            margin: 14px 0;
+        }
+        .footer {
+            margin: 24px 0 0;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 26px 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="login-box">
+        <header class="brand">
+            <div class="logo" aria-hidden="true">T</div>
+            <h1>TrustVault</h1>
+            <p class="subtitle">
+                Secure Document Sharing<br>
+                With a Real Audit Trail
+            </p>
+        </header>
+        <div class="security-note">
+            <span aria-hidden="true">🔒</span>
+            <span>Secure access to your documents</span>
+        </div>
+        {% if error %}
+            <p class="error" role="alert">{{ error }}</p>
+        {% endif %}
+        <form action="{{ url_for('login') }}" method="POST">
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                autocomplete="username"
+                required
+            >
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+            >
+            <button type="submit">Sign In Securely</button>
+        </form>
+        <section class="demo">
+            <div class="demo-title">Demo Login Credentials</div>
+            <div class="account">
+                <strong>Admin Account</strong><br>
+                Email: admin@trustvault.com<br>
+                Password: TrustVault@123
+            </div>
+            <hr>
+            <div class="account">
+                <strong>User Account</strong><br>
+                Email: user@trustvault.com<br>
+                Password: UserVault@123
+            </div>
+        </section>
+        <p class="footer">
+            TrustVault &copy; 2026 | Secure Document Management
+        </p>
+    </main>
+</body>
+</html>
+```
